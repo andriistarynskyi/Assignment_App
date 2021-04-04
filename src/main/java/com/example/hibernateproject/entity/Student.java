@@ -7,19 +7,17 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class User {
+public class Student {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String sName;
 
-    public User() {
+    public Student() {
     }
 
-    public User(String name, String sName) {
+    public Student(String name) {
         this.name = name;
-        this.sName = sName;
     }
 
     public int getId() {
@@ -38,33 +36,24 @@ public class User {
         this.name = name;
     }
 
-    public String getsName() {
-        return sName;
-    }
-
-    public void setsName(String sName) {
-        this.sName = sName;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", sName='" + sName + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof User)) return false;
-        User user = (User) o;
-        return getId() == user.getId() && getName().equals(user.getName()) && getsName().equals(user.getsName());
+        if (!(o instanceof Student)) return false;
+        Student student = (Student) o;
+        return getId() == student.getId() && getName().equals(student.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getsName());
+        return Objects.hash(getId(), getName());
     }
 }
