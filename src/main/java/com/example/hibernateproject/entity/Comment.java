@@ -14,9 +14,9 @@ public class Comment {
     private Student student;
     @OneToOne
     private Assignment assignment;
-    @OneToMany (cascade = CascadeType.PERSIST)
+    @OneToMany (cascade = CascadeType.MERGE)
     @JoinColumn(name = "comment_id")
-    private List<Comment> comment;
+    private List<Comment> comments;
 
 
     public Comment() {
@@ -26,6 +26,14 @@ public class Comment {
         this.commentText = commentText;
         this.student = student;
         this.assignment = assignment;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public int getId() {

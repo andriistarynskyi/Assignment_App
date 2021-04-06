@@ -1,10 +1,7 @@
 package com.example.hibernateproject.repository;
 
 import com.example.hibernateproject.entity.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICommentRepository {
-
-    void save(Comment comment);
-
-    Comment findById(int id);
+public interface ICommentRepository extends JpaRepository<Comment, Integer> {
 }
