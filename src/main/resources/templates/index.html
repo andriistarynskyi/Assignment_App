@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/main.css" rel="stylesheet" type="text/css">
+    <title>List of all assignments</title>
+    <style>
+        table, th, tr td {
+            border: 1px solid black;
+        }
+
+        tr:nth-child(even) {
+            background: #CCC
+        }
+
+        tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
+</head>
+<body>
+<div>
+    <a href="/addAssignment"><input type="button" value="add assignment"/></a>
+    <table>
+        <thead>
+        <tr>
+            <th> Id</th>
+            <th> Description</th>
+            <th> Professor</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="assignment: ${assignments}">
+            <td th:text="${assignment.id}">id</td>
+            <td th:text="${assignment.description}">Description</td>
+            <td th:text="${assignment.professor.name}">Professor</td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

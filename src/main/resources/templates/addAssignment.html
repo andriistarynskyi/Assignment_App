@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="main.css" rel="stylesheet" type="text/css">
+    <title>Add assigment</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div>
+    <h3>Add assigment</h3>
+    <form action="#" th:action="@{/addAssignment}" th:object="${assignment}" method="post">
+        <p>Description <input type="text" th:field="*{description}"/></p>
+        <p>Select professor
+            <select th:field="${assignment.professor}">
+                <option th:each="professor: ${professors}" th:value="${professor}" th:text="${professor}"></option>
+            </select>
+        </p>
+        <p>Select student
+            <select th:field="${assignment.student}">
+                <option th:each="student: ${students}" th:value="${student}" th:text="${student}"></option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="submit"/>
+            <input type="reset" value="reset"/>
+        </p>
+    </form>
+</div>
+</body>
+</html>
