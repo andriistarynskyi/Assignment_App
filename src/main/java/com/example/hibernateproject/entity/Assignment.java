@@ -18,11 +18,7 @@ public class Assignment {
     public Assignment() {
     }
 
-    public Assignment(String description, Professor professor, Student student) {
-        this.description = description;
-        this.professor = professor;
-        this.student = student;
-    }
+
 
     public int getId() {
         return id;

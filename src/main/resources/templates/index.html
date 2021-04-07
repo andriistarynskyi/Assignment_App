@@ -20,21 +20,20 @@
     </style>
 </head>
 <body>
-<div>
-    <a href="/addAssignment"><input type="button" value="add assignment"/></a>
+    <a href="/add_assignment"><input type="button" value="add assignment"/></a>
     <table>
         <thead>
         <tr>
-            <th> Id</th>
             <th> Description</th>
             <th> Professor</th>
+            <th> Student</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="assignment: ${assignments}">
-            <td th:text="${assignment.id}">id</td>
-            <td th:text="${assignment.description}">Description</td>
-            <td th:text="${assignment.professor.name}">Professor</td>
+        <tr th:each="assignmentDTO: ${assignmentDTOList}">
+            <td th:text="${assignmentDTO.description}">description</td>
+            <td th:text="${assignmentDTO.professorName}">Professor</td>
+            <td th:text="${assignmentDTO.studentName}">Student</td>
         </tr>
     </table>
 </div>

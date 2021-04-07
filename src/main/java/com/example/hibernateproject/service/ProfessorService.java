@@ -31,4 +31,9 @@ public class ProfessorService implements IProfessorService {
     public List<Professor> findAll() {
         return professorRepository.findAll();
     }
+
+    @Override
+    public List<Professor> findByName(String name) {
+        return professorRepository.findByName(name);
+    }
 }

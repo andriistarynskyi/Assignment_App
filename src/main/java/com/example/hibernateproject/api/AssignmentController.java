@@ -1,9 +1,8 @@
 package com.example.hibernateproject.api;
 
-import com.example.hibernateproject.entity.Assignment;
-import com.example.hibernateproject.entity.Professor;
-import com.example.hibernateproject.entity.Student;
+import com.example.hibernateproject.entity.dto.AssignmentDTO;
 import com.example.hibernateproject.service.IAssignmentService;
+import com.example.hibernateproject.service.IMapService;
 import com.example.hibernateproject.service.IProfessorService;
 import com.example.hibernateproject.service.IStudentService;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class AssignmentController {
@@ -20,38 +20,44 @@ public class AssignmentController {
     private final IAssignmentService assignmentService;
     private final IStudentService studentService;
     private final IProfessorService professorService;
+    private final IMapService mapService;
 
 
     public AssignmentController(IAssignmentService assignmentService,
                                 IStudentService studentService,
-                                IProfessorService professorService) {
+                                IProfessorService professorService,
+                                IMapService mapService) {
         this.assignmentService = assignmentService;
         this.studentService = studentService;
         this.professorService = professorService;
+        this.mapService = mapService;
     }
 
-    @GetMapping(value = "/")
+    @GetMapping("/")
     public String findAll(Model model) {
-        List<Assignment> assignments = assignmentService.findAll();
-        model.addAttribute("assignments", assignments);
+        List<AssignmentDTO> assignmentDTOList = assignmentService.findAll().
+                stream().
+                map(a -> mapService.getAssigmentDTO(a)).
+                collect(Collectors.toList());
+        model.addAttribute("assignmentDTOList", assignmentDTOList);
         return "index";
     }
 
-    @GetMapping(value = "/addAssignment")
-    public String addAssignment(Model model) {
-        List<Student> students = studentService.findAll();
-        model.addAttribute("students", students);
-        List<Professor> professors = professorService.findAll();
-        model.addAttribute("professors", professors);
-        model.addAttribute("assignment", new Assignment());
-        return "addAssignment";
+    @GetMapping("/add_assignment")
+    public String addAssigment(Model model) {
+        List<AssignmentDTO> assignmentDTOList = assignmentService.findAll().
+                stream().
+                map(a -> mapService.getAssigmentDTO(a)).
+                collect(Collectors.toList());
+        model.addAttribute("assignmentDTOList", assignmentDTOList);
+        model.addAttribute("assignmentDTO", new AssignmentDTO());
+        return "add_assignment";
     }
 
-    @PostMapping(value = "/addAssignment")
-    public String addAssignment(@ModelAttribute Assignment assignment, Model model) {
-        model.addAttribute("assignment", assignment);
-        assignmentService.save(assignment);
-        return "index";
+    @PostMapping("/add_assignment")
+    public String submitForm(@ModelAttribute AssignmentDTO assignmentDTO, Model model) {
+        model.addAttribute("assignmentDTO", assignmentDTO);
+        assignmentService.save(mapService.getAssignment(assignmentDTO));
+        return "redirect:/";
     }
 }
-

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="static/main.css" rel="stylesheet" type="text/css">
+    <title>List of all assignments</title>
+    <style>
+        table, th, tr td {
+            border: 1px solid black;
+        }
+
+        tr:nth-child(even) {
+            background: #CCC
+        }
+
+        tr:nth-child(odd) {
+            background: #FFF
+        }
+    </style>
+</head>
+<body>
+<form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post">
+    <p> description
+        <input type="text" th:field="*{description}"/>
+    </p>
+    <p>
+        <select th:field="*{professorName}">
+            <option th:each="assignmentDTO: ${assignmentDTOList}"
+                    th:value="${assignmentDTO.professorName}"
+                    th:text="${assignmentDTO.professorName}">
+            </option>
+        </select>
+        <select th:field="*{studentName}">
+            <option th:each="assignmentDTO: ${assignmentDTOList}"
+                    th:value="${assignmentDTO.studentName}"
+                    th:text="${assignmentDTO.studentName}">
+            </option>
+        </select>
+    </p>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+</body>
+</html>

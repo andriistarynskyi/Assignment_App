@@ -12,4 +12,6 @@ public interface IStudentService {
     Optional<Student> findById(int id);
 
     List<Student> findAll();
+
+    List<Student> findByName(String name);
 }

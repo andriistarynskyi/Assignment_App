@@ -12,4 +12,6 @@ public interface IProfessorService {
     Optional<Professor> findById(int id);
 
     List<Professor> findAll();
+
+    List<Professor> findByName(String name);
 }
