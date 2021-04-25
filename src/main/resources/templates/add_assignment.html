@@ -21,24 +21,29 @@
 </head>
 <body>
 <form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post">
-    <p> description
+    <p> Description
         <input type="text" th:field="*{description}"/>
     </p>
     <p>
-        <select th:field="*{professorName}">
-            <option th:each="assignmentDTO: ${assignmentDTOList}"
-                    th:value="${assignmentDTO.professorName}"
-                    th:text="${assignmentDTO.professorName}">
-            </option>
-        </select>
-        <select th:field="*{studentName}">
-            <option th:each="assignmentDTO: ${assignmentDTOList}"
-                    th:value="${assignmentDTO.studentName}"
-                    th:text="${assignmentDTO.studentName}">
+        <label for="professorName">Select professor:</label>
+        <select th:field="*{professorName}" id="professorName">
+            <option th:each="professor: ${professors}"
+                    th:value="${professor.name}"
+                    th:text="${professor.name}">
             </option>
         </select>
     </p>
-    <p><input type="submit" value="Submit"/></p>
+    <p>
+        <label for="studentName">Select student:</label>
+        <select th:field="*{studentName}" id="studentName">
+            <option th:each="student: ${students}"
+                    th:value="${student.name}"
+                    th:text="${student.name}">
+            </option>
+        </select>
+    </p>
+    <input type="submit" value="Submit"/>
+    <input type="reset" value="Reset"/>
 </form>
 </body>
 </html>

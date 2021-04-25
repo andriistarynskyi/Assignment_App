@@ -4,6 +4,7 @@ import com.example.hibernateproject.entity.Assignment;
 import com.example.hibernateproject.entity.Professor;
 import com.example.hibernateproject.entity.Student;
 import com.example.hibernateproject.entity.dto.AssignmentDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,6 +12,7 @@ public class MapService implements IMapService {
     private final IProfessorService professorService;
     private final IStudentService studentService;
 
+    @Autowired
     public MapService(IProfessorService professorService, IStudentService studentService) {
         this.professorService = professorService;
         this.studentService = studentService;

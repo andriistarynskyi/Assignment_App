@@ -1,10 +1,13 @@
 package com.example.hibernateproject.api;
 
+import com.example.hibernateproject.entity.Professor;
+import com.example.hibernateproject.entity.Student;
 import com.example.hibernateproject.entity.dto.AssignmentDTO;
 import com.example.hibernateproject.service.IAssignmentService;
 import com.example.hibernateproject.service.IMapService;
 import com.example.hibernateproject.service.IProfessorService;
 import com.example.hibernateproject.service.IStudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +25,7 @@ public class AssignmentController {
     private final IProfessorService professorService;
     private final IMapService mapService;
 
-
+    @Autowired
     public AssignmentController(IAssignmentService assignmentService,
                                 IStudentService studentService,
                                 IProfessorService professorService,
@@ -50,6 +53,10 @@ public class AssignmentController {
                 map(a -> mapService.getAssigmentDTO(a)).
                 collect(Collectors.toList());
         model.addAttribute("assignmentDTOList", assignmentDTOList);
+        List<Professor> professors = professorService.findAll();
+        model.addAttribute("professors", professors);
+        List<Student> students = studentService.findAll();
+        model.addAttribute("students", students);
         model.addAttribute("assignmentDTO", new AssignmentDTO());
         return "add_assignment";
     }
