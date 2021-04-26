@@ -7,6 +7,8 @@ import com.example.hibernateproject.entity.dto.AssignmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class MapService implements IMapService {
     private final IProfessorService professorService;
@@ -31,7 +33,8 @@ public class MapService implements IMapService {
 
     @Override
     public AssignmentDTO getAssigmentDTO(Assignment assignment) {
-        return (new AssignmentDTO(assignment.getDescription(),
+        return (new AssignmentDTO(assignment.getId(),
+                assignment.getDescription(),
                 assignment.getProfessor().getName(),
                 assignment.getStudent().getName()));
     }

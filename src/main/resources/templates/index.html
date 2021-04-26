@@ -1,41 +1,46 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/main.css" rel="stylesheet" type="text/css">
+    <!--    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>-->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <title>List of all assignments</title>
-    <style>
-        table, th, tr, td {
-            border: 1px solid black;
-        }
-
-        tr:nth-child(even) {
-            background: #CCC
-        }
-
-        tr:nth-child(odd) {
-            background: #FFF
-        }
-    </style>
 </head>
 <body>
-    <a href="/add_assignment"><input type="button" value="add assignment"/></a>
-    <table>
+<div class="container">
+    <h3 class="display-4">Assignments management system.</h3>
+    <div class="col text-right">
+        <a href="/add_assignment"><input type="button" value="add assignment" class="btn btn-warning"/></a>
+    </div>
+    <table class="table table-hover table-responsive-md">
         <thead>
         <tr>
-            <th> Description</th>
-            <th> Professor</th>
-            <th> Student</th>
+            <th scope="col"> #</th>
+            <th scope="col"> Description</th>
+            <th scope="col"> Professor</th>
+            <th scope="col"> Student</th>
+            <th scope="col"> Add comment</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="assignmentDTO: ${assignmentDTOList}">
+            <td th:text="${assignmentDTO.id}">description</td>
             <td th:text="${assignmentDTO.description}">description</td>
             <td th:text="${assignmentDTO.professorName}">Professor</td>
             <td th:text="${assignmentDTO.studentName}">Student</td>
+            <td>
+                <a th:href="@{'assignment/' + ${assignmentDTO.id}}">
+                    <input type="text" class="btn btn-large btn-primary" value="add comment"/>
+                </a>
+            </td>
         </tr>
     </table>
 </div>
+</div>
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </body>
 </html>

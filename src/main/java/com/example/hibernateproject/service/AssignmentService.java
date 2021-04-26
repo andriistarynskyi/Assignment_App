@@ -2,6 +2,7 @@ package com.example.hibernateproject.service;
 
 import com.example.hibernateproject.entity.Assignment;
 import com.example.hibernateproject.repository.IAssignmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class AssignmentService implements IAssignmentService {
     private final IAssignmentRepository assignmentRepository;
 
+    @Autowired
     public AssignmentService(IAssignmentRepository assignmentRepository) {
         this.assignmentRepository = assignmentRepository;
     }

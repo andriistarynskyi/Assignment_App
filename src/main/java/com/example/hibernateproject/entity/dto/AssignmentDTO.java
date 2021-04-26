@@ -3,6 +3,7 @@ package com.example.hibernateproject.entity.dto;
 import java.util.Objects;
 
 public class AssignmentDTO {
+    private int id;
     private String description;
     private String professorName;
     private String studentName;
@@ -10,10 +11,19 @@ public class AssignmentDTO {
     public AssignmentDTO() {
     }
 
-    public AssignmentDTO(String description, String professorName, String studentName) {
+    public AssignmentDTO(int id, String description, String professorName, String studentName) {
+        this.id = id;
         this.description = description;
         this.professorName = professorName;
         this.studentName = studentName;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescription() {
@@ -41,15 +51,25 @@ public class AssignmentDTO {
     }
 
     @Override
+    public String toString() {
+        return "AssignmentDTO{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                ", professorName='" + professorName + '\'' +
+                ", studentName='" + studentName + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof AssignmentDTO)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
         AssignmentDTO that = (AssignmentDTO) o;
-        return getDescription().equals(that.getDescription()) && getProfessorName().equals(that.getProfessorName()) && getStudentName().equals(that.getStudentName());
+        return id == that.id && description.equals(that.description) && professorName.equals(that.professorName) && studentName.equals(that.studentName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getDescription(), getProfessorName(), getStudentName());
+        return Objects.hash(id, description, professorName, studentName);
     }
 }

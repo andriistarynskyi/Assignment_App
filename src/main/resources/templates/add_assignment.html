@@ -3,47 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="static/main.css" rel="stylesheet" type="text/css">
-    <title>List of all assignments</title>
-    <style>
-        table, th, tr td {
-            border: 1px solid black;
-        }
-
-        tr:nth-child(even) {
-            background: #CCC
-        }
-
-        tr:nth-child(odd) {
-            background: #FFF
-        }
-    </style>
+    <link href="../static/css/main.css" rel="stylesheet" type="text/css">
+    <title>Add assignment</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
-<form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post">
-    <p> Description
-        <input type="text" th:field="*{description}"/>
-    </p>
-    <p>
-        <label for="professorName">Select professor:</label>
-        <select th:field="*{professorName}" id="professorName">
-            <option th:each="professor: ${professors}"
-                    th:value="${professor.name}"
-                    th:text="${professor.name}">
-            </option>
-        </select>
-    </p>
-    <p>
-        <label for="studentName">Select student:</label>
-        <select th:field="*{studentName}" id="studentName">
-            <option th:each="student: ${students}"
-                    th:value="${student.name}"
-                    th:text="${student.name}">
-            </option>
-        </select>
-    </p>
-    <input type="submit" value="Submit"/>
-    <input type="reset" value="Reset"/>
-</form>
+<div class="container">
+    <h5 class="display-6">Add assignment</h5>
+    <form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post" class="form-group">
+        <p> Description
+            <input type="text" th:field="*{description}"/>
+        </p>
+        <p>
+            <label for="professorName">Select professor:</label>
+            <select th:field="*{professorName}" id="professorName">
+                <option th:each="professor: ${professors}"
+                        th:value="${professor.name}"
+                        th:text="${professor.name}">
+                </option>
+            </select>
+        </p>
+        <p>
+            <label for="studentName">Select student:</label>
+            <select th:field="*{studentName}" id="studentName">
+                <option th:each="student: ${students}"
+                        th:value="${student.name}"
+                        th:text="${student.name}">
+                </option>
+            </select>
+        </p>
+        <input type="submit" value="Submit" class="btn btn-success"/>
+        <input type="reset" value="Reset" class="btn btn-danger"/>
+
+    </form>
+</div>
 </body>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </html>

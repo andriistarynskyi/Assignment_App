@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface IAssignmentService {
     void save(Assignment assignment);
 
-    Optional<Assignment> findById(int id);
-
     List<Assignment> findAll();
+
+    Optional<Assignment> findById(int id);
 }
