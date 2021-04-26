@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="https://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,14 +9,16 @@
 </head>
 <body>
 <div class="container">
-    <h5 class="display-6">Add assignment</h5>
+    <div class="col-sm-6">
+        <h2>Add assignment</h2>
+    </div>
     <form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post" class="form-group">
-        <p> Description
-            <input type="text" th:field="*{description}"/>
+        <p> Description:
+            <input type="text" th:field="*{description}" placeholder="please enter assignment title..." class="form-control"/>
         </p>
         <p>
-            <label for="professorName">Select professor:</label>
-            <select th:field="*{professorName}" id="professorName">
+            <label for="professorName" class="col-sm-2 col-form-label">Select professor:</label>
+            <select th:field="*{professorName}" id="professorName" class="form-control">
                 <option th:each="professor: ${professors}"
                         th:value="${professor.name}"
                         th:text="${professor.name}">
@@ -24,17 +26,16 @@
             </select>
         </p>
         <p>
-            <label for="studentName">Select student:</label>
-            <select th:field="*{studentName}" id="studentName">
+            <label for="studentName" class="col-sm-2 col-form-label">Select student:</label>
+            <select th:field="*{studentName}" id="studentName" class="form-control">
                 <option th:each="student: ${students}"
                         th:value="${student.name}"
                         th:text="${student.name}">
                 </option>
             </select>
         </p>
-        <input type="submit" value="Submit" class="btn btn-success"/>
-        <input type="reset" value="Reset" class="btn btn-danger"/>
-
+        <input type="submit" value="Submit" class="btn btn-lg btn-success"/>
+        <input type="reset" value="Reset" class="btn btn-lg btn-danger"/>
     </form>
 </div>
 </body>

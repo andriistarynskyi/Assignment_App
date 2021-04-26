@@ -3,39 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--    <link th:href="@{/css/main.css}" rel="stylesheet" type="text/css"/>-->
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <title>List of all assignments</title>
 </head>
 <body>
 <div class="container">
-    <h3 class="display-4">Assignments management system.</h3>
-    <div class="col text-right">
-        <a href="/add_assignment"><input type="button" value="add assignment" class="btn btn-warning"/></a>
+    <div class="table-wrapper">
+        <div class="table-title">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2>Manage Assignments</h2>
+                </div>
+                <div class="col-sm-6">
+                    <a href="/add_assignment" class="btn btn-success">
+                        <span>Add Assignment</span></a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-hover table-responsive-md">
+            <thead>
+            <tr>
+                <th scope="col"> #</th>
+                <th scope="col"> Description</th>
+                <th scope="col"> Professor</th>
+                <th scope="col"> Student</th>
+                <th scope="col"> Add comment</th>
+                <th scope="col"> Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="assignmentDTO: ${assignmentDTOList}">
+                <td th:text="${assignmentDTO.id}">description</td>
+                <td th:text="${assignmentDTO.description}">description</td>
+                <td th:text="${assignmentDTO.professorName}">Professor</td>
+                <td th:text="${assignmentDTO.studentName}">Student</td>
+                <td>
+                    <a th:href="@{'assignment/' + ${assignmentDTO.id}}">
+                        <input type="text" class="btn btn-sm btn-primary" value="add comment"/>
+                    </a>
+                </td>
+                <td>
+                    <a th:href="@{'assignment/' + ${assignmentDTO.id}}">
+                        <input type="text" class="btn btn-sm btn-danger" value="delete"/>
+                    </a>
+                </td>
+            </tr>
+        </table>
     </div>
-    <table class="table table-hover table-responsive-md">
-        <thead>
-        <tr>
-            <th scope="col"> #</th>
-            <th scope="col"> Description</th>
-            <th scope="col"> Professor</th>
-            <th scope="col"> Student</th>
-            <th scope="col"> Add comment</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="assignmentDTO: ${assignmentDTOList}">
-            <td th:text="${assignmentDTO.id}">description</td>
-            <td th:text="${assignmentDTO.description}">description</td>
-            <td th:text="${assignmentDTO.professorName}">Professor</td>
-            <td th:text="${assignmentDTO.studentName}">Student</td>
-            <td>
-                <a th:href="@{'assignment/' + ${assignmentDTO.id}}">
-                    <input type="text" class="btn btn-large btn-primary" value="add comment"/>
-                </a>
-            </td>
-        </tr>
-    </table>
 </div>
 </div>
 
