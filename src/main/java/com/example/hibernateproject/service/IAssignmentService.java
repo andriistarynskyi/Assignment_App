@@ -11,4 +11,6 @@ public interface IAssignmentService {
     List<Assignment> findAll();
 
     Optional<Assignment> findById(int id);
+
+    void delete(Assignment assignment);
 }

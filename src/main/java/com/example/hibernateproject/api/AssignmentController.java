@@ -1,5 +1,6 @@
 package com.example.hibernateproject.api;
 
+import com.example.hibernateproject.entity.Assignment;
 import com.example.hibernateproject.entity.Professor;
 import com.example.hibernateproject.entity.Student;
 import com.example.hibernateproject.entity.dto.AssignmentDTO;
@@ -10,11 +11,10 @@ import com.example.hibernateproject.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -65,6 +65,33 @@ public class AssignmentController {
     public String submitForm(@ModelAttribute AssignmentDTO assignmentDTO, Model model) {
         model.addAttribute("assignmentDTO", assignmentDTO);
         assignmentService.save(mapService.getAssignment(assignmentDTO));
+        return "redirect:/";
+    }
+
+    @GetMapping("assignment/{id}/delete")
+    public String getAssignmentById(@PathVariable("id") String id, Model model) {
+        int assignmentId = Integer.parseInt(id);
+        Optional<Assignment> assignmentOptional = assignmentService.findById(assignmentId);
+        if (assignmentOptional.isPresent()) {
+            Assignment assignment = assignmentOptional.get();
+            AssignmentDTO assignmentDTO = mapService.getAssigmentDTO(assignment);
+            model.addAttribute("assignmentDTO", assignmentDTO);
+        } else {
+            model.addAttribute("assignmentDTO", "Assignment is not available");
+        }
+        return "delete";
+    }
+
+    @PostMapping("assignment/{id}/delete")
+    public String remove(@PathVariable("id") String id, Model model) {
+        int assignmentId = Integer.parseInt(id);
+        Optional<Assignment> assignmentOptional = assignmentService.findById(assignmentId);
+        if (assignmentOptional.isPresent()) {
+            Assignment assignment = assignmentOptional.get();
+            assignmentService.delete(assignment);
+        } else {
+            model.addAttribute("Assignment does not exist");
+        }
         return "redirect:/";
     }
 }

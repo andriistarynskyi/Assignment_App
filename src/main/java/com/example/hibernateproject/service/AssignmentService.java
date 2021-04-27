@@ -33,4 +33,9 @@ public class AssignmentService implements IAssignmentService {
     public List<Assignment> findAll() {
         return assignmentRepository.findAll();
     }
+
+    @Override
+    public void delete(Assignment assignment) {
+        assignmentRepository.delete(assignment);
+    }
 }
