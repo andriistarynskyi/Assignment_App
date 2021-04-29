@@ -7,13 +7,16 @@
     <title>Remove assignment permanently</title>
 </head>
 <body>
-<form action="#" th:action="@{|/assignment/${assignmentDTO.id}/delete|}" method="post" th:object="${assignmentDTO}" class="form-group">
-    <div th:each="assignment: ${assignmentDTO}">
-        <h3 th:text="${assignment.description}"></h3>
-        <h3 th:text="${assignment.professorName}"></h3>
-        <h3 th:text="${assignment.studentName}"></h3>
-        <input type="submit" class="btn btn-danger" value="delete"/>
-</form>
+<div class="container">
+    <form action="#" th:action="@{|/assignment/${assignmentDTO.id}/delete|}" method="post" th:object="${assignmentDTO}"
+          class="form-group">
+        <div th:each="assignment: ${assignmentDTO}">
+            <h5 th:text="${assignment.description}"></h5>
+            <p>Professor name: <span th:text="${assignment.professorName}"></span></p>
+            <p>Student name: <span th:text="${assignment.studentName}"></span></p>
+            <input type="submit" class="btn btn-danger" value="delete"/>
+        </div>
+    </form>
 </div>
 <script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>

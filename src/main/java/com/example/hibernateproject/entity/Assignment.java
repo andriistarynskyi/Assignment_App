@@ -18,8 +18,6 @@ public class Assignment {
     public Assignment() {
     }
 
-
-
     public int getId() {
         return id;
     }

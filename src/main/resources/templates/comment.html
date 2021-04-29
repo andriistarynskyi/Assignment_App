@@ -3,13 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <title>Add comments</title>
 </head>
 <body>
-<div th:each="assignment: ${assignmentDTO}">
-    <h3 th:text="${assignment.description}"></h3>
-    <h3 th:text="${assignment.professorName}"></h3>
-    <h3 th:text="${assignment.studentName}"></h3>
+<div class="container">
+    <div th:each="assignment: ${assignmentDTO}">
+        <h5 th:text="${assignment.description}"></h5>
+        <p>Professor name: <span th:text="${assignment.professorName}"></span></p>
+        <p>Student name: <span th:text="${assignment.studentName}"></span></p>
+    </div>
+    <div>
+        <div th:if="${not #lists.isEmpty(commentDTOs)}">
+            <div th:each="commentDTO: ${commentDTOs}">
+                <p th:text="${commentDTO.commentText}"></p>
+            </div>
+        </div>
+    </div>
+    <form action="#" th:action="@{|/assignment/${assignmentDTO.id}|}" method="post" th:object="${assignmentDTO}">
+        <label for="exampleFormControlTextarea">Add comment</label>
+        <div th:object="${commentDTO}">
+            <textarea th:field="*{commentText}" class="form-control" id="exampleFormControlTextarea" rows="3"></textarea>
+            <input type="submit" class="btn btn-success"/>
+        </div>
+    </form>
+
 </div>
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
 </body>
 </html>

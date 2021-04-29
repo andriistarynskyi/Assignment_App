@@ -71,27 +71,17 @@ public class AssignmentController {
     @GetMapping("assignment/{id}/delete")
     public String getAssignmentById(@PathVariable("id") String id, Model model) {
         int assignmentId = Integer.parseInt(id);
-        Optional<Assignment> assignmentOptional = assignmentService.findById(assignmentId);
-        if (assignmentOptional.isPresent()) {
-            Assignment assignment = assignmentOptional.get();
-            AssignmentDTO assignmentDTO = mapService.getAssigmentDTO(assignment);
-            model.addAttribute("assignmentDTO", assignmentDTO);
-        } else {
-            model.addAttribute("assignmentDTO", "Assignment is not available");
-        }
+        Assignment assignment = assignmentService.findById(assignmentId).orElseThrow(RuntimeException::new);
+        AssignmentDTO assignmentDTO = mapService.getAssigmentDTO(assignment);
+        model.addAttribute("assignmentDTO", assignmentDTO);
         return "delete";
     }
 
     @PostMapping("assignment/{id}/delete")
-    public String remove(@PathVariable("id") String id, Model model) {
+    public String remove(@PathVariable("id") String id) {
         int assignmentId = Integer.parseInt(id);
-        Optional<Assignment> assignmentOptional = assignmentService.findById(assignmentId);
-        if (assignmentOptional.isPresent()) {
-            Assignment assignment = assignmentOptional.get();
-            assignmentService.delete(assignment);
-        } else {
-            model.addAttribute("Assignment does not exist");
-        }
+        Assignment assignment = assignmentService.findById(assignmentId).orElseThrow(RuntimeException::new);
+        assignmentService.delete(assignment);
         return "redirect:/";
     }
 }

@@ -1,23 +1,27 @@
 package com.example.hibernateproject.service;
 
 import com.example.hibernateproject.entity.Assignment;
+import com.example.hibernateproject.entity.Comment;
 import com.example.hibernateproject.entity.Professor;
 import com.example.hibernateproject.entity.Student;
 import com.example.hibernateproject.entity.dto.AssignmentDTO;
+import com.example.hibernateproject.entity.dto.CommentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 public class MapService implements IMapService {
-    private final IProfessorService professorService;
-    private final IStudentService studentService;
+    private IProfessorService professorService;
+    private IStudentService studentService;
+    private ICommentService commentService;
 
     @Autowired
-    public MapService(IProfessorService professorService, IStudentService studentService) {
+    public MapService(IProfessorService professorService,
+                      IStudentService studentService,
+                      ICommentService commentService) {
         this.professorService = professorService;
         this.studentService = studentService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -37,5 +41,17 @@ public class MapService implements IMapService {
                 assignment.getDescription(),
                 assignment.getProfessor().getName(),
                 assignment.getStudent().getName()));
+    }
+
+    @Override
+    public Comment getComment(CommentDTO commentDTO, Assignment assignment) {
+        return (new Comment(commentDTO.getCommentText(),
+                assignment.getStudent(),
+                assignment));
+    }
+
+    @Override
+    public CommentDTO getCommentDTO(Comment comment) {
+        return (new CommentDTO(comment.getCommentText()));
     }
 }
