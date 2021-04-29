@@ -14,7 +14,7 @@
     </div>
     <form action="#" th:action="@{add_assignment}" th:object="${assignmentDTO}" method="post" class="form-group">
         <p> Description:
-            <input type="text" th:field="*{description}" placeholder="please enter assignment title..." class="form-control"/>
+            <input type="text" th:field="*{description}" placeholder="please enter assignment title..." class="form-control" required="required"/>
         </p>
         <p>
             <label for="professorName" class="col-sm-2 col-form-label">Select professor:</label>

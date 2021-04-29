@@ -52,6 +52,6 @@ public class CommentController {
         model.addAttribute("assignmentDTO", mapService.getAssigmentDTO(assignment));
         Comment comment = new Comment(commentDTO.getCommentText(), assignment.getStudent(), assignment);
         commentService.save(comment);
-        return "comment";
+        return "redirect:/";
     }
 }

@@ -14,7 +14,7 @@
         <p>Student name: <span th:text="${assignment.studentName}"></span></p>
     </div>
     <div>
-        <div th:if="${not #lists.isEmpty(commentDTOs)}">
+        <div th:unless="${#lists.isEmpty(commentDTOs)}">
             <div th:each="commentDTO: ${commentDTOs}">
                 <p th:text="${commentDTO.commentText}"></p>
             </div>
