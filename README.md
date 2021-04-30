@@ -7,3 +7,9 @@ Technologies:
 - Thymeleaf;
 - Bootstrap 4.
 
+<p align="center">
+<img src="https://github.com/andriistarynskyi/Spring_JPA_Thymeleaf_app/blob/master/ui.png">
+</p>
+<p align="center">
+<img src="https://github.com/andriistarynskyi/Spring_JPA_Thymeleaf_app/blob/master/DB_diagram.png">
+ </p>
