@@ -1,4 +1,4 @@
-package com.example.hibernateproject.api;
+package com.example.hibernateproject.controller;
 
 import com.example.hibernateproject.entity.Assignment;
 import com.example.hibernateproject.entity.Professor;
@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller

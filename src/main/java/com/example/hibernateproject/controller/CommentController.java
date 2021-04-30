@@ -1,4 +1,4 @@
-package com.example.hibernateproject.api;
+package com.example.hibernateproject.controller;
 
 import com.example.hibernateproject.entity.Assignment;
 import com.example.hibernateproject.entity.Comment;
